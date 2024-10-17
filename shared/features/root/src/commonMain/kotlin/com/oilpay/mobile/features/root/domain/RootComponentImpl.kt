@@ -4,45 +4,51 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.oilpay.features.auth_root.AuthRootScreenComponent
+import com.oilpay.mobile.core.di.Injector
 import kotlinx.serialization.Serializable
-import libraries.decompose.common.BaseComponent
+import libraries.decompose.common.DecomposeComponent
+import libraries.decompose.common.context.wrapComponentContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.getScopeId
 
 internal class RootComponentImpl(
     componentContext: ComponentContext
-): RootComponent, BaseComponent(componentContext) {
+): RootComponent, ComponentContext by componentContext, KoinComponent {
 
     private val navigation = StackNavigation<Config>()
+
+    private val authRootFactory by Injector.lazy<AuthRootScreenComponent.Factory>()
 
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.MainFlow,
+        initialConfiguration = Config.LoginFlow,
         handleBackButton = true,
         key = KEY,
         childFactory = ::processChild
     )
 
-    override val childStack: ChildStack<*, RootComponent.Child> = stack.value
+    override val childStack: ChildStack<*, DecomposeComponent> = stack.value
 
     private fun processChild(
         config: Config,
         componentContext: ComponentContext
-    ) = when (config) {
-        is Config.Onboarding -> RootComponent.Child.OnBoarding(
-            Unit
+    ): DecomposeComponent {
+        val context = wrapComponentContext(
+            context = componentContext,
+            parentScopeID = getKoin().getScopeId()
         )
-        is Config.MainFlow -> RootComponent.Child.Auth(
-            Unit
-        )
+        return when(config) {
+            is Config.LoginFlow -> authRootFactory.create(context = context)
+        }
     }
 
     @Serializable
     private sealed interface Config {
         @Serializable
-        data object MainFlow : Config
+        data object LoginFlow : Config
 
-        @Serializable
-        data object Onboarding : Config
     }
 
     companion object {

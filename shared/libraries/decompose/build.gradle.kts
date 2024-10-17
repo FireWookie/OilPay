@@ -3,6 +3,7 @@ import com.oilpay.app.external.commonDependencies
 
 plugins {
     alias(libs.plugins.oilpay.library)
+
 }
 
 android {
@@ -16,12 +17,14 @@ kotlin {
         commonDependencies {
             api(libs.decompose.compose)
             api(libs.decompose)
+            api(libs.essenty.lifecycle)
 
+            implementation(libs.kotlinx.coroutines.core)
             implementation(projects.shared.libraries.platform)
 
             api(libs.koin.core)
-            implementation(libs.viewmodel.compose)
-            implementation(libs.mvi.orbit)
+            api(libs.viewmodel.compose)
+            api(libs.mvi.orbit)
         }
     }
 }

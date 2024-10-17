@@ -1,9 +1,9 @@
-package com.oilpay.features.auth_root
+package com.oilpay.features.auth_root.component
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import libraries.decompose.common.DecomposeComponent
 
-interface AuthRootComponent {
+internal interface AuthRootComponent {
     val childStack: ChildStack<*, DecomposeComponent>
 
 }

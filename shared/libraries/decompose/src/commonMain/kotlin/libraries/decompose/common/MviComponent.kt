@@ -17,7 +17,7 @@ interface MviComponent<STATE: Any, ACTION: Any, SIDE_EFFECT: Any, STORE> where S
         get() = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     val store: STORE
-    fun dispatch(action: ACTION)
+    fun dispatchAction(action: ACTION)
 
     @OrbitDsl
     fun intent(

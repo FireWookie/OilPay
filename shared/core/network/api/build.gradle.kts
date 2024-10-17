@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.oilpay.mobile.features.login.api"
+    namespace = "com.oilpay.mobile.core.network.api"
 }
 
 kotlin {
@@ -15,7 +15,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            implementation(projects.shared.libraries.decompose)
+
         }
     }
 }

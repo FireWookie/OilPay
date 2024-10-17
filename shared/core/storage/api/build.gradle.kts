@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.oilpay.mobile.core.storage.impl"
+    namespace = "com.oilpay.mobile.core.storage.api"
 }
 
 kotlin {
@@ -16,8 +16,6 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-
-
         }
     }
 }

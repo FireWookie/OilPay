@@ -31,6 +31,6 @@ fun Project.composeCompiler(block: ComposeCompilerGradlePluginExtension.() -> Un
 
 internal fun Project.configureKotlinAndroidToolchain() {
     extensions.configure<KotlinAndroidProjectExtension> {
-        jvmToolchain(17)
+        jvmToolchain(21)
     }
 }

@@ -3,8 +3,7 @@ package com.oilpay.mobile.network.params
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.HttpClientEngineBase
 import io.ktor.client.engine.HttpClientEngineFactory
-import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.engine.okhttp.OkHttpEngine
+import io.ktor.client.engine.darwin.Darwin
 
 
-actual val ktorEngine: HttpClientEngineFactory<*> = OkHttp
+actual val ktorEngine: HttpClientEngineFactory<*> = Darwin

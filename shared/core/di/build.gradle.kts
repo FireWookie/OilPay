@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.oilpay.mobile.core.storage.impl"
+    namespace = "com.oilpay.mobile.core.di"
 }
 
 kotlin {
@@ -16,7 +16,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-
+            api(libs.koin.core)
         }
     }
 }

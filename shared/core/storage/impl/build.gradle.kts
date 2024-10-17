@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.oilpay.mobile.core.network.impl"
+    namespace = "com.oilpay.mobile.core.storage.impl"
 }
 
 kotlin {
@@ -16,21 +16,11 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            implementation(projects.shared.core.network.api)
+            implementation(projects.shared.core.storage.api)
+            implementation(projects.shared.core.di)
+            implementation(projects.shared.libraries.datastore)
 
-            implementation(libs.ktor.client.serialization)
-            implementation(libs.ktor.client.logging)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(libs.ktor.client.core)
-        }
-
-        androidDependencies {
-            implementation(libs.ktor.client.okhttp)
-        }
-
-        iosDependencies {
-            implementation(libs.ktor.client.darwin)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }

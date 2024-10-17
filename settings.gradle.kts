@@ -33,23 +33,37 @@ dependencyResolutionManagement {
 }
 include(":composeApp")
 
+include(":shared:core:network:api")
+include(":shared:core:network:impl")
+
+include(":shared:core:storage:api")
+include(":shared:core:storage:impl")
+
+include(":shared:core:di")
+
 include(":shared:compose:foundation:theme")
 include(":shared:compose:foundation:core")
 include(":shared:compose:foundation:uikit")
 include(":shared:compose:foundation:icons")
 
 include(":shared:features:auth:login:api")
-include(":shared:features:auth:login:data")
-include(":shared:features:auth:login:ui")
+include(":shared:features:auth:login:impl")
 
-include(":shared:features:auth:security")
-include(":shared:features:auth:identification")
-include(":shared:features:auth:root")
+include(":shared:features:auth:security:api")
+include(":shared:features:auth:security:impl")
+
+include(":shared:features:auth:identification:api")
+include(":shared:features:auth:identification:impl")
+
+include(":shared:features:auth:root:api")
+include(":shared:features:auth:root:impl")
 
 include(":shared:common-network")
 include(":shared:umbrella-core")
 
-include(":shared:features:onboarding")
+include(":shared:features:onboarding:api")
+include(":shared:features:onboarding:impl")
+
 include(":shared:features:root")
 
 include(":shared:libraries:decompose")

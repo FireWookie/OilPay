@@ -1,3 +1,4 @@
+import com.oilpay.app.external.androidDependencies
 import com.oilpay.app.external.applyTargets
 import com.oilpay.app.external.commonDependencies
 
@@ -6,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.oilpay.mobile.umbrella_core"
+    namespace = "com.oilpay.mobile.libraries.datastore"
 }
 
 kotlin {
@@ -14,7 +15,10 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            implementation(libs.koin.core)
+            api(libs.androidx.datastore.core)
+        }
+        androidDependencies {
+            api(libs.androidx.datastore)
         }
     }
 }

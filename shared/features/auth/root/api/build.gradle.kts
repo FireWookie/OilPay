@@ -3,12 +3,11 @@ import com.oilpay.app.external.commonDependencies
 
 plugins {
     alias(libs.plugins.oilpay.library)
-    alias(libs.plugins.oilpay.compose)
 
 }
 
 android {
-    namespace = "com.oilpay.mobile.features.login.api"
+    namespace = "com.oilpay.mobile.features.login_root.api"
 }
 
 kotlin {
@@ -16,7 +15,6 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            implementation(projects.shared.compose.foundation.uikit)
             implementation(projects.shared.libraries.decompose)
         }
     }
