@@ -1,25 +1,23 @@
-package com.oilpay.features.auth_root
+package com.oilpay.features.otp_code
 
 import libraries.decompose.common.DecomposeComponent
 import libraries.decompose.common.content.ComponentContentOwner
 import libraries.decompose.common.context.AppComponentContext
 import libraries.decompose.common.producer.EventsProducer
 
-interface AuthRootScreenComponent :
+interface OtpCodeScreenComponent:
     DecomposeComponent,
     ComponentContentOwner,
-    EventsProducer<AuthRootScreenComponent.Event> {
+    EventsProducer<OtpCodeScreenComponent.Event> {
 
     fun interface Factory {
 
         fun create(
-            context: AppComponentContext,
-            onNavigateMain: () -> Unit
-        ): AuthRootScreenComponent
+            context: AppComponentContext
+        ): OtpCodeScreenComponent
     }
 
     sealed class Event {
-
-        data object OnBackClick : Event()
+        data object GoVerification : Event()
     }
 }

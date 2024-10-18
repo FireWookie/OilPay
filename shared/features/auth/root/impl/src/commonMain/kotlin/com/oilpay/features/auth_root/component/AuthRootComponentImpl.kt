@@ -23,7 +23,8 @@ import org.koin.core.component.inject
 import org.koin.core.qualifier.qualifier
 
 internal class AuthRootComponentImpl(
-    componentContext: AppComponentContext
+    componentContext: AppComponentContext,
+    private val onNavigateMain: () -> Unit
 ):
     AuthRootComponent,
     AuthRootScreenComponent,

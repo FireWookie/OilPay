@@ -7,9 +7,10 @@ import org.koin.dsl.module
 
 val authRootDI = module {
     single {
-        AuthRootScreenComponent.Factory { context ->
+        AuthRootScreenComponent.Factory { context, onNavigate ->
             AuthRootComponentImpl(
-                componentContext = context
+                componentContext = context,
+                onNavigateMain = onNavigate
             )
         }
     }

@@ -40,7 +40,10 @@ internal class RootComponentImpl(
             parentScopeID = getKoin().getScopeId()
         )
         return when(config) {
-            is Config.LoginFlow -> authRootFactory.create(context = context)
+            is Config.LoginFlow -> authRootFactory.create(
+                context = context,
+                onNavigateMain = {}
+            )
         }
     }
 

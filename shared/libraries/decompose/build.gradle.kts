@@ -3,6 +3,7 @@ import com.oilpay.app.external.commonDependencies
 
 plugins {
     alias(libs.plugins.oilpay.library)
+    alias(libs.plugins.oilpay.compose)
 
 }
 

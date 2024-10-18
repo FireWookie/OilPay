@@ -49,6 +49,9 @@ include(":shared:compose:foundation:icons")
 include(":shared:features:auth:login:api")
 include(":shared:features:auth:login:impl")
 
+include(":shared:features:auth:otp_code:api")
+include(":shared:features:auth:otp_code:impl")
+
 include(":shared:features:auth:security:api")
 include(":shared:features:auth:security:impl")
 
