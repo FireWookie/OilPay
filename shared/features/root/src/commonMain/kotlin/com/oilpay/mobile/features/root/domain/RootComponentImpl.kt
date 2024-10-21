@@ -1,14 +1,28 @@
 package com.oilpay.mobile.features.root.domain
 
+import androidx.compose.runtime.rememberCoroutineScope
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.replaceCurrent
+import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
+import com.oilpay.core.storage.AuthStorage
 import com.oilpay.features.auth_root.AuthRootScreenComponent
 import com.oilpay.mobile.core.di.Injector
+import com.oilpay.onboarding.OnBoardingComponent
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import libraries.decompose.common.DecomposeComponent
 import libraries.decompose.common.context.wrapComponentContext
+import libraries.decompose.common.ext.stackComponentEvents
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.getScopeId
 
@@ -18,16 +32,57 @@ internal class RootComponentImpl(
 
     private val navigation = StackNavigation<Config>()
 
+    private val storage by Injector.lazy<AuthStorage>()
+
     private val authRootFactory by Injector.lazy<AuthRootScreenComponent.Factory>()
+    private val onBoardingFactory by Injector.lazy<OnBoardingComponent.Factory>()
+
+    private val coroutineScope = coroutineScope()
 
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.LoginFlow,
+        initialConfiguration = initialConfiguration(),
         handleBackButton = true,
         key = KEY,
         childFactory = ::processChild
     )
+
+    private fun initialConfiguration(): Config = runBlocking {
+        val isAuth = storage.getAccessToken().isNotEmpty()
+        val statusBoarding = storage.getStatusBoarding()
+
+        if (!isAuth && statusBoarding) {
+            Config.LoginFlow
+        } else if (!isAuth && statusBoarding) {
+            Config.OnBoarding
+        } else {
+            Config.OnBoarding
+        }
+    }
+
+    init {
+        checkNavigate()
+//        stack
+//            .stackComponentEvents<AuthRootScreenComponent.Event>()
+//            .take(1)
+//            .onEach {
+//                when (it) {
+//                    AuthRootScreenComponent.Event.OnBackClick -> navigation.push(Config.LoginFlow)
+//                }
+//            }
+//            .launchIn(coroutineScope)
+        stack
+            .stackComponentEvents<OnBoardingComponent.Event>()
+            .take(1)
+            .onEach {
+                println("Event here: $it")
+                when(it) {
+                    OnBoardingComponent.Event.NavigateToAuth -> navigation.replaceCurrent(Config.LoginFlow)
+                }
+            }
+            .launchIn(coroutineScope)
+    }
 
     override val childStack: ChildStack<*, DecomposeComponent> = stack.value
 
@@ -40,10 +95,25 @@ internal class RootComponentImpl(
             parentScopeID = getKoin().getScopeId()
         )
         return when(config) {
-            is Config.LoginFlow -> authRootFactory.create(
-                context = context,
-                onNavigateMain = {}
+            Config.LoginFlow -> authRootFactory.create(
+                context = context
             )
+
+            Config.OnBoarding -> onBoardingFactory.create(
+                context = context
+            )
+        }
+    }
+
+    private fun checkNavigate() {
+        runBlocking {
+            val isAuth = storage.getAccessToken().isNotEmpty()
+            val statusBoarding = storage.getStatusBoarding()
+            if (!isAuth && statusBoarding) {
+                navigation.replaceCurrent(Config.LoginFlow)
+            } else if (!isAuth && statusBoarding) {
+                navigation.replaceCurrent(Config.OnBoarding)
+            }
         }
     }
 
@@ -51,6 +121,9 @@ internal class RootComponentImpl(
     private sealed interface Config {
         @Serializable
         data object LoginFlow : Config
+
+        @Serializable
+        data object OnBoarding: Config
 
     }
 

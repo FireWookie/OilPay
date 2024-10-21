@@ -28,6 +28,7 @@ internal class LoginComponentImpl(
             is LoginAction.InputPhone -> blockingIntent {
                 reduce { state.copy(phone = action.phone) }
             }
+
         }
     }
 

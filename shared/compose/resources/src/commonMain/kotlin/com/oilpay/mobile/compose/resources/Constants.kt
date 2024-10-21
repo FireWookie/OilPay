@@ -1,5 +1,6 @@
 package com.oilpay.mobile.compose.resources
 
-object Constants {
+import org.jetbrains.compose.resources.getString
 
+object Constants {
 }

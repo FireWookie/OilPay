@@ -14,7 +14,6 @@ interface AuthRootScreenComponent :
 
         fun create(
             context: AppComponentContext,
-            onNavigateMain: () -> Unit
         ): AuthRootScreenComponent
     }
 

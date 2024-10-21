@@ -1,6 +1,5 @@
 package com.oilpay.onboarding
 
-import com.arkivanov.decompose.router.stack.ChildStack
 import libraries.decompose.common.DecomposeComponent
 import libraries.decompose.common.content.ComponentContentOwner
 import libraries.decompose.common.context.AppComponentContext

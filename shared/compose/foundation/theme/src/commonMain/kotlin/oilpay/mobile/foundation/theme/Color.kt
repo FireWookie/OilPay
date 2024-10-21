@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 // TODO change light colors scheme
 internal val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 internal val md_theme_light_primaryContainer = Color(0xF000000)
-internal val md_theme_light_secondary = Color(0xFF292929)
+internal val md_theme_light_secondary = Color(0xFF232222)
 internal val md_theme_light_onSecondary = Color(0xFFE1E0E6)
 internal val md_theme_light_tertiary = Color(0xFFFFFFFF)
 
@@ -57,7 +57,7 @@ fun lightColors(): OilPayColors {
         tertiary = md_theme_light_tertiary,
         background = Color.White,
         onBackground = Color.Black,
-        secondary = md_theme_light_secondary,
+        secondary = Color(0xFF232222),
         onSecondary = md_theme_light_onSecondary,
         onPrimary = md_theme_light_onPrimary,
     )
@@ -71,7 +71,7 @@ fun darkColors(): OilPayColors {
         tertiary = md_theme_dark_tertiary,
         background = Color.Black,
         onBackground = Color.White,
-        secondary = md_theme_dark_secondary,
+        secondary = Color(0xFF232222),
         onSecondary = md_theme_dark_onSecondary,
         onPrimary = md_theme_light_onPrimary
     )

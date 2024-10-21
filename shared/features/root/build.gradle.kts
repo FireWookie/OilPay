@@ -18,7 +18,10 @@ kotlin {
         commonDependencies {
             implementation(projects.shared.compose.foundation.uikit)
             implementation(projects.shared.libraries.decompose)
+
+            implementation(projects.shared.core.storage.api)
             implementation(projects.shared.features.auth.root.api)
+            implementation(projects.shared.features.onboarding.api)
 
             implementation(projects.shared.core.di)
         }

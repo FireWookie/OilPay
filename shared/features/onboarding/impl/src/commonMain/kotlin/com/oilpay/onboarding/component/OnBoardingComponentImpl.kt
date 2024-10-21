@@ -25,11 +25,15 @@ internal class OnBoardingComponentImpl(
             OnBoardingAction.NextPage -> intent { reduce { state.copy(page = state.page + 1) } }
             OnBoardingAction.PreviousPage -> intent { reduce { state.copy(page = state.page - 1) } }
             OnBoardingAction.Skip -> skipOnBoarding()
+            OnBoardingAction.NavigateToAuth -> dispatch(OnBoardingComponent.Event.NavigateToAuth)
         }
     }
 
-    private fun skipOnBoarding() = store.launch {
-        store.setViewedOnBoarding()
+    private fun skipOnBoarding() {
+        store.launch {
+            store.setViewedOnBoarding()
+        }
+        dispatch(OnBoardingComponent.Event.NavigateToAuth)
     }
 
 }

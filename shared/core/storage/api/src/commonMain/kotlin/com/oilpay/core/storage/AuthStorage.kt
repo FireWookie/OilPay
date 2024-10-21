@@ -7,4 +7,7 @@ interface AuthStorage {
     fun setRefreshToken(token: String)
     fun getAccessToken(): String
     fun getRefreshToken(): String
+
+    fun viewedOnBoarding()
+    fun getStatusBoarding(): Boolean
 }

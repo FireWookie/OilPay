@@ -61,6 +61,7 @@ androidx-datastore-core = { module = "androidx.datastore:datastore-preferences-c
 mvi-orbit = { module = "org.orbit-mvi:orbit-core", version.ref = "mvi-orbit" }
 
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty"  }
+essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty"  }
 
 viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel-kmp" }
 

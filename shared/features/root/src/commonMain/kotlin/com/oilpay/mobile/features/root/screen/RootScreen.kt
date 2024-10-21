@@ -12,11 +12,9 @@ fun RootScreen(component: RootComponent) {
     Children(
         stack = component.childStack
     ) { stack ->
+        println("Stack: ${stack.instance}")
         when(val instance = stack.instance) {
-            is AuthRootScreenComponent -> instance.content.Content(Modifier)
-            else -> {
-                println("stack: $instance")
-            }
+            is ComponentContentOwner -> instance.content.Content(Modifier)
         }
     }
 }

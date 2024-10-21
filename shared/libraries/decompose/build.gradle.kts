@@ -19,6 +19,7 @@ kotlin {
             api(libs.decompose.compose)
             api(libs.decompose)
             api(libs.essenty.lifecycle)
+            api(libs.essenty.lifecycle.coroutines)
 
             implementation(libs.kotlinx.coroutines.core)
             implementation(projects.shared.libraries.platform)
