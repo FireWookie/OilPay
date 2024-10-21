@@ -21,6 +21,8 @@ import org.koin.core.component.KoinComponent
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.container
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 abstract class MviStore<STATE: Any, ACTION: Any, SIDE_EFFECT: Any>(
     state: STATE
@@ -29,6 +31,14 @@ abstract class MviStore<STATE: Any, ACTION: Any, SIDE_EFFECT: Any>(
     private val defaultModelScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
     override val container: Container<STATE, SIDE_EFFECT> = viewModelScope.container(initialState = state)
+
+    open fun launch(
+        ceh: CoroutineExceptionHandler = CoroutineExceptionHandler {_, _ ->},
+        coroutineContext: CoroutineContext = EmptyCoroutineContext,
+        operation: suspend (CoroutineScope) -> Unit
+    ): Job {
+        return viewModelScope.launch(ceh + coroutineContext) { operation.invoke(this) }
+    }
 
     open fun <T> launchOperation(
         operation: suspend (CoroutineScope) -> Either<Failure, T>,
