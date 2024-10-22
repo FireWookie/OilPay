@@ -29,6 +29,9 @@ internal class LoginComponentImpl(
                 reduce { state.copy(phone = action.phone) }
             }
 
+            is LoginAction.ClickCheckbox -> blockingIntent {
+                reduce { state.copy(checked = action.checked) }
+            }
         }
     }
 

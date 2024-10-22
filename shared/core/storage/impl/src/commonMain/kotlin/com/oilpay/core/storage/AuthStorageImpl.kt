@@ -40,20 +40,4 @@ internal class AuthStorageImpl(
     override fun getRefreshToken(): String = runBlocking {
         dataStore.data.first().refreshToken
     }
-
-    override fun viewedOnBoarding() {
-        scope.launch {
-            dataStore.edit {
-                viewedOnBoarding()
-            }
-        }
-    }
-
-    override fun getStatusBoarding(): Boolean = runBlocking {
-        dataStore.data.first().onBoarding
-    }
-
-    override val isAuth: Boolean = runBlocking {
-        true
-    }
 }

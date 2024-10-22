@@ -1,4 +1,4 @@
-package com.oilpay.onboarding.ui.component
+package com.oilpay.onboarding.ui.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

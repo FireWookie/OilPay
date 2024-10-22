@@ -3,6 +3,7 @@ package com.oilpay.onboarding.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
@@ -32,9 +34,11 @@ import com.oilpay.mobile.compose.resources.third_boarding
 import com.oilpay.onboarding.component.OnBoardingAction
 import com.oilpay.onboarding.component.OnBoardingComponentImpl
 import com.oilpay.onboarding.component.OnBoardingState
-import com.oilpay.onboarding.ui.component.OnBoardingTopBar
+import com.oilpay.onboarding.ui.composable.OnBoardingTopBar
 import libraries.decompose.common.content.ComponentContent
+import oilpay.mobile.foundation.theme.OilPayTheme
 import oilpay.mobile.foundation.uikit.CustomSpacer
+import oilpay.mobile.foundation.uikit.WeightSpacer
 import oilpay.mobile.foundation.uikit.buttons.PrimaryButton
 import oilpay.mobile.foundation.uikit.layout.TrapezoidRow
 import oilpay.mobile.foundation.uikit.pager.PagerIndicators
@@ -66,13 +70,17 @@ internal class OnBoardingScreen(
         state: OnBoardingState
     ) {
         val pagerState = rememberPagerState(pageCount = { PAGE_COUNT })
-        LaunchedEffect(state.page) {
-            pagerState.animateScrollToPage(state.page)
+
+        LaunchedEffect(pagerState) {
+            snapshotFlow { pagerState.currentPage }.collect { page ->
+                component.dispatchAction(OnBoardingAction.ChangePage(page))
+            }
         }
 
         Scaffold(
             topBar = { OnBoardingTopBar { component.dispatchAction(OnBoardingAction.Skip) } },
-            bottomBar = { PagerIndicators(PAGE_COUNT, state.page, Modifier) }
+            bottomBar = { PagerIndicators(PAGE_COUNT, state.page, Modifier.navigationBarsPadding()) },
+            containerColor = OilPayTheme.colors.background
         ) { padding ->
             HorizontalPager(
                 state = pagerState,
@@ -101,6 +109,7 @@ internal class OnBoardingScreen(
                     .size(350.dp)
                     .offset(x = 75.dp)
             )
+            WeightSpacer()
             if (page == countPage - 1) {
                 PrimaryButton(
                     text = stringResource(Res.string.order),

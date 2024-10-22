@@ -18,6 +18,7 @@ class AppActivity : ComponentActivity() {
         enableEdgeToEdge()
         val root = buildRootComponent(defaultComponentContext())
         setContent {
+
             OilPayTheme {
                 RootScreen(component = root)
             }

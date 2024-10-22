@@ -9,12 +9,15 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.router.stack.replaceCurrent
+import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.oilpay.core.storage.AuthStorage
+import com.oilpay.core.storage.OnBoardingStorage
 import com.oilpay.features.auth_root.AuthRootScreenComponent
 import com.oilpay.mobile.core.di.Injector
 import com.oilpay.onboarding.OnBoardingComponent
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
@@ -33,6 +36,7 @@ internal class RootComponentImpl(
     private val navigation = StackNavigation<Config>()
 
     private val storage by Injector.lazy<AuthStorage>()
+    private val storageBoarding by Injector.lazy<OnBoardingStorage>()
 
     private val authRootFactory by Injector.lazy<AuthRootScreenComponent.Factory>()
     private val onBoardingFactory by Injector.lazy<OnBoardingComponent.Factory>()
@@ -50,7 +54,7 @@ internal class RootComponentImpl(
 
     private fun initialConfiguration(): Config = runBlocking {
         val isAuth = storage.getAccessToken().isNotEmpty()
-        val statusBoarding = storage.getStatusBoarding()
+        val statusBoarding = storageBoarding.onBoardingStatus()
 
         if (!isAuth && statusBoarding) {
             Config.LoginFlow
@@ -63,28 +67,27 @@ internal class RootComponentImpl(
 
     init {
         checkNavigate()
-//        stack
-//            .stackComponentEvents<AuthRootScreenComponent.Event>()
-//            .take(1)
-//            .onEach {
-//                when (it) {
-//                    AuthRootScreenComponent.Event.OnBackClick -> navigation.push(Config.LoginFlow)
-//                }
-//            }
-//            .launchIn(coroutineScope)
+        stack
+            .stackComponentEvents<AuthRootScreenComponent.Event>()
+            .filterIsInstance<AuthRootScreenComponent.Event>()
+            .onEach {
+                when (it) {
+                    AuthRootScreenComponent.Event.OnBackClick -> navigation.push(Config.LoginFlow)
+                }
+            }
+            .launchIn(coroutineScope)
         stack
             .stackComponentEvents<OnBoardingComponent.Event>()
-            .take(1)
+            .filterIsInstance<OnBoardingComponent.Event>()
             .onEach {
-                println("Event here: $it")
                 when(it) {
-                    OnBoardingComponent.Event.NavigateToAuth -> navigation.replaceCurrent(Config.LoginFlow)
+                    OnBoardingComponent.Event.NavigateToAuth -> navigation.push(Config.LoginFlow)
                 }
             }
             .launchIn(coroutineScope)
     }
 
-    override val childStack: ChildStack<*, DecomposeComponent> = stack.value
+    override val childStack: Value<ChildStack<*, DecomposeComponent>> = stack
 
     private fun processChild(
         config: Config,
@@ -108,7 +111,7 @@ internal class RootComponentImpl(
     private fun checkNavigate() {
         runBlocking {
             val isAuth = storage.getAccessToken().isNotEmpty()
-            val statusBoarding = storage.getStatusBoarding()
+            val statusBoarding = storageBoarding.onBoardingStatus()
             if (!isAuth && statusBoarding) {
                 navigation.replaceCurrent(Config.LoginFlow)
             } else if (!isAuth && statusBoarding) {

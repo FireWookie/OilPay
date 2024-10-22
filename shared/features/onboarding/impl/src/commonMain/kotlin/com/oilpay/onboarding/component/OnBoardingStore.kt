@@ -8,9 +8,8 @@ data class OnBoardingState(
 
 sealed interface OnBoardingAction {
     data object Skip: OnBoardingAction
-    data object NextPage: OnBoardingAction
     data object NavigateToAuth: OnBoardingAction
-    data object PreviousPage: OnBoardingAction
+    data class ChangePage(val page: Int): OnBoardingAction
 }
 
 sealed interface OnBoardingSideEffect {

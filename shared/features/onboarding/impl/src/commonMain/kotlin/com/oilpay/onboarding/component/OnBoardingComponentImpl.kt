@@ -22,10 +22,9 @@ internal class OnBoardingComponentImpl(
 
     override fun dispatchAction(action: OnBoardingAction) {
         when(action) {
-            OnBoardingAction.NextPage -> intent { reduce { state.copy(page = state.page + 1) } }
-            OnBoardingAction.PreviousPage -> intent { reduce { state.copy(page = state.page - 1) } }
             OnBoardingAction.Skip -> skipOnBoarding()
             OnBoardingAction.NavigateToAuth -> dispatch(OnBoardingComponent.Event.NavigateToAuth)
+            is OnBoardingAction.ChangePage -> intent { reduce { state.copy(page = action.page) } }
         }
     }
 

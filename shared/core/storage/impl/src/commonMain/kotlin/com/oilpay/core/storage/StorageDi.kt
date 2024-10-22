@@ -11,4 +11,8 @@ val storageModule = module {
         bind<AuthStorage>()
         createdAtStart()
     }
+
+    singleOf(::OnBoardingStorageImpl) {
+        bind<OnBoardingStorage>()
+    }
 }

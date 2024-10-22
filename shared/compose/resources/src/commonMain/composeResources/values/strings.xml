@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OilPay</string>
+    <string name="offer_link">https://google.com/</string>
 
     <string-array name="cashback_oil">
         <item>КЕШБЕК НА \nЗАПРАВКАХ</item>
@@ -33,6 +34,11 @@
     <string name="confirm">Подтвердить</string>
     <string name="code">код</string>
 
+    <string name="for">для</string>
+    <string name="entrance">входа</string>
+
+    <string name="registration">регистрации</string>
+
     <string name="enter">Введите</string>
     <string name="sms_code">смс-код</string>
 
@@ -51,6 +57,11 @@
     <string name="on_here_number_send_code">На этот номер придет СМС-код  необходимый для подтверждения</string>
 
     <string name="skip">Пропустить</string>
+
+    <string name="i_accept">Я принимаю условия </string>
+    <string name="public_offerts">публичные оферты</string>
+
+    <string name="continue">Продолжить</string>
 
     <string name="order">Заказать</string>
 </resources>

@@ -10,11 +10,11 @@ private val REFRESH_TOKEN = stringPreferencesKey("refresh_token")
 private val ON_BOARDING = booleanPreferencesKey("on_boarding")
 
 
-fun MutablePreferences.accessToken(accessToken: String) {
+internal fun MutablePreferences.accessToken(accessToken: String) {
     this[ACCESS_TOKEN] = accessToken
 }
 
-fun MutablePreferences.refreshToken(refreshToken: String) {
+internal fun MutablePreferences.refreshToken(refreshToken: String) {
     this[REFRESH_TOKEN] = refreshToken
 }
 
@@ -24,8 +24,8 @@ internal val Preferences.accessToken: String
 internal val Preferences.refreshToken: String
     get() = this[ACCESS_TOKEN] ?: ""
 
-internal fun MutablePreferences.onBoardingViewed() {
-    this[ON_BOARDING] = true
+internal fun MutablePreferences.onBoardingViewed(status: Boolean) {
+    this[ON_BOARDING] = status
 }
 
 internal val Preferences.onBoarding: Boolean
