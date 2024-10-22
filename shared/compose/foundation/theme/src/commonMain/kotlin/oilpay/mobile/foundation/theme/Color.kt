@@ -1,79 +1,63 @@
 package oilpay.mobile.foundation.theme
 
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-// TODO change light colors scheme
-internal val md_theme_light_onPrimary = Color(0xFFFFFFFF)
-internal val md_theme_light_primaryContainer = Color(0xF000000)
-internal val md_theme_light_secondary = Color(0xFF232222)
-internal val md_theme_light_onSecondary = Color(0xFFE1E0E6)
-internal val md_theme_light_tertiary = Color(0xFFFFFFFF)
+internal val LocalColors =
+    compositionLocalOf<OilPayColors> { error("No colors provided! Make sure to wrap all usages of components in a OilPayTheme.") }
 
-// TODO change dark colors scheme
-internal val md_theme_dark_primaryContainer = Color(0xFF2F2F2F)
-internal val md_theme_dark_secondary = Color(0x33ffffff)
-internal val md_theme_dark_onSecondary = Color(0xFF00373A)
-internal val md_theme_dark_tertiary = Color(0xFFFFB77C)
+@Stable
+private fun figmaColor(hex: String) =
+    Color(color = hex.removePrefix("#").prependIndent("FF").toLong(radix = 16))
 
-
-internal val seed = Color(0xFF2C3639)
+internal val pumpkinColor = figmaColor("#FF7C1A")
+internal val aquaColor = figmaColor("#0079E0")
+internal val lightGrayColor = figmaColor("#6A6A6A")
+internal val signalBlackColor = figmaColor("#333333")
+internal val blackBrownColor = figmaColor("#232222")
+internal val partBlackColor = figmaColor("#121212")
+internal val redColor = figmaColor("#EF233C")
+internal val darkGrayColor = figmaColor("#393939")
 
 interface OilPayColors {
     val primary: Color
-    val primaryContainer: Color
-    val tertiary: Color
-    val background: Color
-    val onBackground: Color
-    val secondary: Color
-    val onSecondary: Color
     val onPrimary: Color
+    val background: Color
+    val backgroundContainer: Color
+    val secondary: Color
+    val error: Color
+    val text: Color
+    val outline: Color
+    val surfaceContainer: Color
+    val onBackground: Color
 }
 
 class OilPayColorsLight(
     override val primary: Color,
-    override val primaryContainer: Color,
-    override val tertiary: Color,
-    override val background: Color,
-    override val onBackground: Color,
-    override val secondary: Color,
-    override val onSecondary: Color,
     override val onPrimary: Color,
+    override val background: Color,
+    override val backgroundContainer: Color,
+    override val secondary: Color,
+    override val error: Color,
+    override val text: Color,
+    override val outline: Color,
+    override val surfaceContainer: Color,
+    override val onBackground: Color
 ) : OilPayColors
 
-
-internal val LocalColors = compositionLocalOf<OilPayColors> {
-    error(
-        "No colors provided! Make sure to wrap all usages of components in a " +
-                "TalkTheme."
-    )
-}
-
-
-fun lightColors(): OilPayColors {
-    return OilPayColorsLight(
-        primary = Color(0xFFFF7C1A),
-        primaryContainer = md_theme_light_primaryContainer,
-        tertiary = md_theme_light_tertiary,
-        background = Color(0xFF121212),
-        onBackground = Color.Black,
-        secondary = Color(0xFF232222),
-        onSecondary = md_theme_light_onSecondary,
-        onPrimary = md_theme_light_onPrimary,
-    )
-}
+fun darkColors() = OilPayColorsLight(
+    primary = pumpkinColor,
+    background = partBlackColor,
+    secondary = aquaColor,
+    error = redColor,
+    backgroundContainer = blackBrownColor,
+    text = lightGrayColor,
+    outline = signalBlackColor,
+    surfaceContainer = darkGrayColor,
+    onBackground = Color.White,
+    onPrimary = Color.White,
+)
 
 
-fun darkColors(): OilPayColors {
-    return OilPayColorsLight(
-        primary = Color(0xFFFF7C1A),
-        primaryContainer = md_theme_dark_primaryContainer,
-        tertiary = md_theme_dark_tertiary,
-        background = Color(0xFF121212),
-        onBackground = Color.White,
-        secondary = Color(0xFF232222),
-        onSecondary = md_theme_dark_onSecondary,
-        onPrimary = md_theme_light_onPrimary
-    )
-}
 

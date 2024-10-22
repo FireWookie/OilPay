@@ -15,21 +15,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import oilpay.mobile.foundation.theme.OilPayTheme
 
-private val circleShape = RoundedCornerShape(percent = 100)
-
 @Composable
 private fun PagerIndicator(isActive: Boolean) {
 
     val modifier = if (isActive) {
         Modifier.background(OilPayTheme.colors.primary)
     } else {
-        Modifier.border(1.dp, OilPayTheme.colors.primary, shape = circleShape)
+        Modifier.border(1.dp, OilPayTheme.colors.primary, shape = OilPayTheme.shapes.round)
     }
 
     Box(
         modifier = Modifier
             .size(10.dp)
-            .clip(circleShape)
+            .clip(OilPayTheme.shapes.round)
             .then(modifier)
     )
 }

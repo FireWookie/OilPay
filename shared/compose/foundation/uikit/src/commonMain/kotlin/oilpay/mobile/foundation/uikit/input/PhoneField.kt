@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.oilpay.mobile.foundation.core.utils.PhoneVisualTransformation
+import oilpay.mobile.foundation.theme.OilPayTheme
 
 private const val MASK_NUMBER = '0'
 private const val MASK = "000 000 00 00"
@@ -55,17 +56,25 @@ fun PhoneField(
                 Text("+998", color = Color.White)
                 Text(
                     text = " 00 000 00 00",
-                    color = Color(0xff6A6A6A)
+                    color = OilPayTheme.colors.text
                 )
             }
         },
         singleLine = true,
         colors = TextFieldDefaults.colors(
-            focusedTextColor = Color.White,
-            focusedContainerColor = Color.Black,
-            unfocusedContainerColor = Color.Black,
-            unfocusedIndicatorColor = Color(0xffFF7C1A)
+            focusedTextColor = OilPayTheme.colors.onBackground,
+            unfocusedTextColor = OilPayTheme.colors.onBackground,
 
+            focusedTrailingIconColor = OilPayTheme.colors.text,
+            unfocusedTrailingIconColor = OilPayTheme.colors.text,
+
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+
+            unfocusedIndicatorColor = OilPayTheme.colors.primary,
+            focusedIndicatorColor = OilPayTheme.colors.primary,
+
+            cursorColor = OilPayTheme.colors.primary
         ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
         visualTransformation = PhoneVisualTransformation(mask, maskNumber),

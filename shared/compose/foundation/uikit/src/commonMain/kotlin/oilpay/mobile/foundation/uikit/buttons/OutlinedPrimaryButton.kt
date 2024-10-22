@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import oilpay.mobile.foundation.theme.OilPayTheme
 
 @Composable
 fun OutlinedPrimaryButton(
@@ -23,13 +24,13 @@ fun OutlinedPrimaryButton(
     OutlinedButton(
         onClick = onClick,
         enabled = isEnabled,
-        shape = RoundedCornerShape(2.dp),
-        border = BorderStroke(1.dp, Color(0xFF0079E0)),
+        shape = OilPayTheme.shapes.default,
+        border = BorderStroke(1.dp, OilPayTheme.colors.secondary),
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = Color.Unspecified,
-            contentColor = Color(0xFF0079E0),
-            disabledContentColor = Color(0xFF6A6A6A),
-            disabledContainerColor = Color(0xFF393939)
+            contentColor = OilPayTheme.colors.secondary,
+            disabledContentColor = OilPayTheme.colors.text,
+            disabledContainerColor = Color.Unspecified
         ),
         modifier = Modifier.fillMaxWidth().height(40.dp).then(modifier)
     ) { Text(text) }

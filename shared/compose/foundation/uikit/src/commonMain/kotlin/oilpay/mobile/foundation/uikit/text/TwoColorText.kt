@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import oilpay.mobile.foundation.theme.OilPayFonts
 import oilpay.mobile.foundation.theme.OilPayTheme
 
 @Composable
@@ -21,6 +22,7 @@ fun TwoColorText(
     defaultColor: Color = OilPayTheme.colors.onBackground,
     accentColor: Color = OilPayTheme.colors.primary,
     isInverted: Boolean = false,
+    spaceBar: String = " ",
     modifier: Modifier = Modifier
 ) {
     val def: Color
@@ -41,20 +43,22 @@ fun TwoColorText(
     Text(
         text = buildAnnotatedString {
             withStyle(style = SpanStyle(
+                fontFamily = OilPayTheme.fonts.montserrat,
                 color = def,
                 fontSize = fontSize,
                 fontStyle = defst,
-                fontWeight = FontWeight(700)
+                fontWeight = FontWeight(700),
             )
             ) {
                 append(defaultText.uppercase())
             }
-            append(" ")
+            append(spaceBar)
             withStyle(style = SpanStyle(
+                fontFamily = OilPayTheme.fonts.montserrat,
                 color = accent,
                 fontStyle = accst,
                 fontSize = fontSize,
-                fontWeight = FontWeight(700)
+                fontWeight = FontWeight(700),
             )) {
                 append(accentText.uppercase())
             }

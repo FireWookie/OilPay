@@ -24,8 +24,8 @@
     </string-array>
 
     <string-array name="info_free_card">
-        <item>бесплатная\nпластиковая карта\n</item>
-        <item>с лимитом\nпо рассрочке</item>
+        <item>бесплатная\nпластиковая карта</item>
+        <item>\nс лимитом\nпо рассрочке</item>
     </string-array>
 
     <string name="fast_login_app">Для быстрого входа в приложение</string>

@@ -15,7 +15,7 @@ import oilpay.mobile.foundation.theme.OilPayTheme
 import oilpay.mobile.foundation.theme.TrapezoidShape
 
 @Composable
-fun TrapezoidRow(
+inline fun TrapezoidRow(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -24,7 +24,7 @@ fun TrapezoidRow(
             .padding(top = 20.dp)
             .fillMaxWidth()
             .heightIn(137.dp)
-            .background(OilPayTheme.colors.secondary, shape = TrapezoidShape())
+            .background(OilPayTheme.colors.backgroundContainer, shape = TrapezoidShape())
             .padding(horizontal = 20.dp, vertical = 25.dp)
             .then(modifier),
         content = content
