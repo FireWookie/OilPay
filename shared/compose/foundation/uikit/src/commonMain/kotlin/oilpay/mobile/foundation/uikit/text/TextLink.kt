@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import oilpay.mobile.foundation.theme.OilPayTheme
 import oilpay.mobile.foundation.uikit.modifiers.noIndicationClickable
 
 @Composable
@@ -22,8 +23,9 @@ fun TextLink(
         text,
         fontSize = fontSize,
         fontWeight = FontWeight(fontWeight),
-        color = Color(0xff0079E0),
+        color = OilPayTheme.colors.secondary,
         textDecoration = textDecoration,
-        modifier = Modifier.noIndicationClickable(onClick)
+        modifier = Modifier.noIndicationClickable(onClick),
+        style = OilPayTheme.typography.smallLabel
     )
 }

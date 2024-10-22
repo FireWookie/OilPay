@@ -1,5 +1,6 @@
 package com.oilpay.mobile.features.root.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -10,6 +11,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.oilpay.features.auth_root.AuthRootScreenComponent
 import com.oilpay.mobile.features.root.domain.RootComponent
 import libraries.decompose.common.content.ComponentContentOwner
+import oilpay.mobile.foundation.theme.OilPayTheme
 
 @Composable
 fun RootScreen(component: RootComponent) {

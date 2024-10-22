@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import oilpay.mobile.foundation.theme.OilPayTheme
 
 @Composable
 fun PrimaryButton(
@@ -21,12 +22,12 @@ fun PrimaryButton(
     Button(
         onClick = onClick,
         enabled = isEnabled,
-        shape = RoundedCornerShape(2.dp),
+        shape = OilPayTheme.shapes.default,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF0079E0),
-            contentColor = Color.White,
-            disabledContentColor = Color(0xFF6A6A6A),
-            disabledContainerColor = Color(0xFF393939)
+            containerColor = OilPayTheme.colors.secondary,
+            contentColor = OilPayTheme.colors.onBackground,
+            disabledContentColor = OilPayTheme.colors.text,
+            disabledContainerColor = OilPayTheme.colors.outline
         ),
         modifier = Modifier.fillMaxWidth().height(40.dp).then(modifier)
     ) { Text(text) }

@@ -78,9 +78,9 @@ internal class OnBoardingScreen(
         }
 
         Scaffold(
+            containerColor = OilPayTheme.colors.background,
             topBar = { OnBoardingTopBar { component.dispatchAction(OnBoardingAction.Skip) } },
-            bottomBar = { PagerIndicators(PAGE_COUNT, state.page, Modifier.navigationBarsPadding()) },
-            containerColor = OilPayTheme.colors.background
+            bottomBar = { PagerIndicators(PAGE_COUNT, state.page, Modifier.navigationBarsPadding().padding(bottom = 20.dp)) },
         ) { padding ->
             HorizontalPager(
                 state = pagerState,
@@ -109,13 +109,14 @@ internal class OnBoardingScreen(
                     .size(350.dp)
                     .offset(x = 75.dp)
             )
-            WeightSpacer()
             if (page == countPage - 1) {
+                WeightSpacer()
                 PrimaryButton(
                     text = stringResource(Res.string.order),
                     onClick = {
                         component.dispatchAction(OnBoardingAction.NavigateToAuth)
-                    }
+                    },
+                    modifier = Modifier.padding(horizontal = 20.dp)
                 )
             }
         }
@@ -139,6 +140,7 @@ internal class OnBoardingScreen(
             1 -> TwoColorText(
                 stringArrayResource(Res.array.cashback_oil)[0],
                 stringArrayResource(Res.array.cashback_oil)[1], isInverted = true,
+                spaceBar = "  ",
                 fontSize = textSizeBoarding
             )
             2 -> TwoColorText(

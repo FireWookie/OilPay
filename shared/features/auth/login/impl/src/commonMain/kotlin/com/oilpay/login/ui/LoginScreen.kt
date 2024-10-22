@@ -29,6 +29,7 @@ import com.oilpay.mobile.compose.resources.placeholder_phone
 import com.oilpay.mobile.compose.resources.registration
 import com.oilpay.mobile.foundation.core.CenteredColumn
 import libraries.decompose.common.content.ComponentContent
+import oilpay.mobile.foundation.theme.OilPayTheme
 import oilpay.mobile.foundation.uikit.CustomSpacer
 import oilpay.mobile.foundation.uikit.WeightSpacer
 import oilpay.mobile.foundation.uikit.input.PhoneField
@@ -37,7 +38,7 @@ import org.jetbrains.compose.resources.stringResource
 
 internal class LoginScreen(
     private val component: LoginComponentImpl
-): ComponentContent {
+) : ComponentContent {
 
     @Composable
     override fun Content(modifier: Modifier) {
@@ -45,10 +46,12 @@ internal class LoginScreen(
 
         CenteredColumn(
             modifier = Modifier
+                .background(OilPayTheme.colors.background)
                 .padding(horizontal = 20.dp)
                 .navigationBarsPadding()
                 .padding(bottom = 20.dp)
                 .imePadding()
+
         ) {
             WeightSpacer()
 
@@ -64,8 +67,7 @@ internal class LoginScreen(
             CustomSpacer(25.dp)
             Text(
                 text = stringResource(Res.string.enter_your_phone),
-                fontWeight = FontWeight(600),
-                fontSize = 12.sp
+                style = OilPayTheme.typography.smallTitle
             )
             CustomSpacer(12.dp)
 
@@ -75,11 +77,10 @@ internal class LoginScreen(
                 maskNumber = '0',
                 onPhoneChanged = { phone -> component.dispatchAction(LoginAction.InputPhone(phone)) }
             )
-
+            CustomSpacer(8.dp)
             Text(
                 text = stringResource(Res.string.on_here_number_send_code),
-                fontSize = 10.sp,
-                color = Color(0xff6A6A6A)
+                style = OilPayTheme.typography.smallLabel
             )
             WeightSpacer()
 
@@ -87,7 +88,7 @@ internal class LoginScreen(
                 isNotEmpty = state.phone.isNotEmpty(),
                 checked = state.checked,
                 onChangeChecked = { component.dispatchAction(LoginAction.ClickCheckbox(it)) },
-                onClick = {}
+                onClick = { component.dispatchAction(LoginAction.ClickLogin) }
             )
         }
     }

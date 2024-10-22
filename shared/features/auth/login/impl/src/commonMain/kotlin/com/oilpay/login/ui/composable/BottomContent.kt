@@ -15,6 +15,7 @@ import com.oilpay.mobile.compose.resources.`continue`
 import com.oilpay.mobile.compose.resources.i_accept
 import com.oilpay.mobile.compose.resources.offer_link
 import com.oilpay.mobile.compose.resources.public_offerts
+import oilpay.mobile.foundation.theme.OilPayTheme
 import oilpay.mobile.foundation.uikit.CustomCheckbox
 import oilpay.mobile.foundation.uikit.CustomSpacer
 import oilpay.mobile.foundation.uikit.buttons.PrimaryButton
@@ -34,24 +35,21 @@ internal fun BottomContent(
     Column(
         modifier = modifier
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        CustomCheckbox(
+            checked = checked,
+            onCheckedChange = { onChangeChecked.invoke(!it) }
         ) {
-            CustomCheckbox(
-                checked = checked,
-                onCheckedChange = { onChangeChecked.invoke(!it) }
+            Text(
+                text = stringResource(Res.string.i_accept),
+                style = OilPayTheme.typography.smallLabel,
+                color = OilPayTheme.colors.onBackground,
+            )
+            TextLink(
+                text = stringResource(Res.string.public_offerts),
+                fontWeight = 400,
+                textDecoration = TextDecoration.Underline
             ) {
-                Text(
-                    text = stringResource(Res.string.i_accept),
-                    fontSize = 10.sp
-                )
-                TextLink(
-                    text = stringResource(Res.string.public_offerts),
-                    fontWeight = 400,
-                    textDecoration = TextDecoration.Underline
-                ) {
-                    uriHandler.openUri(uri)
-                }
+                uriHandler.openUri(uri)
             }
         }
         CustomSpacer(15.dp)

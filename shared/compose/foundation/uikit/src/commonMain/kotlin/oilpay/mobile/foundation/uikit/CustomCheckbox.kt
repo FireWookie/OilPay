@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import oilpay.mobile.foundation.theme.OilPayTheme
 import oilpay.mobile.foundation.uikit.modifiers.noIndicationClickable
 
 
@@ -28,7 +31,8 @@ fun CustomCheckbox(
     Row(
         modifier = Modifier
             .noIndicationClickable { onCheckedChange.invoke(checked) }
-            .then(modifier)
+            .then(modifier),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(checked)
         CustomSpacer(15.dp)
@@ -42,7 +46,7 @@ private fun Checkbox(
     modifier: Modifier = Modifier
 ) {
     val float = if (selected) 1f else 0f
-    val color = if (selected) Color(0xffFF7C1A) else Color(0xff6A6A6A)
+    val color = if (selected) OilPayTheme.colors.primary else OilPayTheme.colors.text
     val animatedColor by animateColorAsState(color)
     val animatedFloat by animateFloatAsState(float)
     Box(
@@ -54,7 +58,7 @@ private fun Checkbox(
         Icon(
             imageVector = Icons.Default.Check,
             contentDescription = null,
-            tint = Color(0xffFF7C1A),
+            tint = OilPayTheme.colors.primary,
             modifier = Modifier.scale(animatedFloat)
         )
 

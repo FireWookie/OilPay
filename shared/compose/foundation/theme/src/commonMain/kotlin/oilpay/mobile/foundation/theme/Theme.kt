@@ -1,9 +1,12 @@
 package oilpay.mobile.foundation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.platform.ViewConfiguration
 import androidx.compose.ui.unit.DpSize
@@ -15,10 +18,10 @@ fun OilPayTheme(
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
-        LocalColors provides if (darkTheme) darkColors() else lightColors(),
+        LocalColors provides darkColors(),
         LocalViewConfiguration provides LocalViewConfiguration.current.updateViewConfiguration()
     ) {
-        content()
+            content()
     }
 }
 
@@ -29,14 +32,16 @@ object OilPayTheme {
         @ReadOnlyComposable
         get() = LocalColors.current
 
-//    val typography: TalkTypography
-//        @Composable
-//        @ReadOnlyComposable
-//        get() = LocalTypography.current
-
-    val fonts: MemoFonts
+    val typography: OilPayTypographies
         @Composable
-        get() = MemoFont()
+        get() = OilPayTypography()
+
+    val shapes : OilPayShapes
+        get() = OilPayShape()
+
+    val fonts: OilPayFonts
+        @Composable
+        get() = OilPayFont()
 }
 
 fun ViewConfiguration.updateViewConfiguration() = object : ViewConfiguration {
