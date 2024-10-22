@@ -67,6 +67,9 @@ include(":shared:umbrella-core")
 include(":shared:features:onboarding:api")
 include(":shared:features:onboarding:impl")
 
+include(":shared:features:splash:api")
+include(":shared:features:splash:impl")
+
 include(":shared:features:root")
 
 include(":shared:libraries:decompose")

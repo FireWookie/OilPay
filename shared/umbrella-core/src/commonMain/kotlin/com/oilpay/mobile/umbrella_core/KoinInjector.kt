@@ -2,6 +2,7 @@ package com.oilpay.mobile.umbrella_core
 
 import com.oilpay.core.storage.storageModule
 import com.oilpay.features.auth_root.authRootDI
+import com.oilpay.features.splash.splashModule
 import com.oilpay.login.loginModuleDI
 import com.oilpay.mobile.network.networkModule
 import com.oilpay.onboarding.onBoardingModule
@@ -27,7 +28,8 @@ object KoinInjector {
                 networkModule,
                 loginModuleDI,
                 authRootDI,
-                onBoardingModule
+                onBoardingModule,
+                splashModule
             )
         )
     }
