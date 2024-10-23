@@ -20,6 +20,7 @@ internal class OnBoardingStorageImpl(
 
     override fun setOnBoardingStatus(isViewed: Boolean) {
         scope.launch {
+            println("status changed to $isViewed")
             dataStore.edit { it.onBoardingViewed(isViewed) }
         }
     }

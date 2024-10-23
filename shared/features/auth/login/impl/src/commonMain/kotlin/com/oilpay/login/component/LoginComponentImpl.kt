@@ -1,6 +1,5 @@
 package com.oilpay.login.component
 
-import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.getOrCreate
 import com.oilpay.login.ui.LoginScreen
 import com.oilpay.mobile.login.api.LoginComponent
@@ -35,7 +34,7 @@ internal class LoginComponentImpl(
         }
     }
 
-    private fun clickLogin() {
-
+    private fun clickLogin() = intent {
+        dispatch(LoginComponent.Event.NavigateToOtp(state.phone))
     }
 }

@@ -13,11 +13,12 @@ interface OtpCodeScreenComponent:
     fun interface Factory {
 
         fun create(
-            context: AppComponentContext
+            context: AppComponentContext,
+            phone: String
         ): OtpCodeScreenComponent
     }
 
     sealed class Event {
-        data object GoVerification : Event()
+
     }
 }

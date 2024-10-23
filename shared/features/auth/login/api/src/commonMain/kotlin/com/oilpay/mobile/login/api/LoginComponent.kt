@@ -1,6 +1,5 @@
 package com.oilpay.mobile.login.api
 
-import com.arkivanov.decompose.ComponentContext
 import libraries.decompose.common.DecomposeComponent
 import libraries.decompose.common.content.ComponentContentOwner
 import libraries.decompose.common.context.AppComponentContext
@@ -18,6 +17,6 @@ interface LoginComponent :
 
     sealed class Event {
 
-        data object OnBackClick : Event()
+        data class NavigateToOtp(val phone: String) : Event()
     }
 }

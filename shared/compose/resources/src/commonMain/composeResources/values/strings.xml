@@ -42,11 +42,11 @@
     <string name="enter">Введите</string>
     <string name="sms_code">смс-код</string>
 
-    <string name="code_have_been_send_to">Код для подтверждения был отправлен на номер \n %1$s</string>
+    <string name="code_have_been_send_to">Код для подтверждения был отправлен на номер \n +998 %1$s</string>
     <string name="again_send_code">Еще раз отправить код</string>
     <string name="and">или</string>
     <string name="call_operator">Связаться с оператором</string>
-    <string name="new_code_after">Вы можете запросить новый код через %1$d</string>
+    <string name="new_code_after">Вы можете запросить новый код через %1$s</string>
 
     <string name="access_geo">Доступ к геопозиции</string>
     <string name="next_after_enable_geo">Чтобы продолжить, включите на устройстве геолокацию</string>
@@ -64,4 +64,6 @@
     <string name="continue">Продолжить</string>
 
     <string name="order">Заказать</string>
+
+    <string name="incorrect_code">Вы ввели неверный код</string>
 </resources>

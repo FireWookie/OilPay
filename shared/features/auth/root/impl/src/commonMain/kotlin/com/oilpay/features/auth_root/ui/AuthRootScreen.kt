@@ -1,31 +1,33 @@
 package com.oilpay.features.auth_root.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.arkivanov.decompose.extensions.compose.stack.animation.fade
+import com.arkivanov.decompose.extensions.compose.stack.animation.plus
+import com.arkivanov.decompose.extensions.compose.stack.animation.scale
+import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.oilpay.features.auth_root.component.AuthRootComponent
-import com.oilpay.mobile.login.api.LoginComponent
 import libraries.decompose.common.content.ComponentContent
+import libraries.decompose.common.content.ComponentContentOwner
 
 
 internal class AuthRootScreen(
     private val component: AuthRootComponent
 ): ComponentContent {
-
     @Composable
     override fun Content(modifier: Modifier) {
-        LaunchedEffect(Unit) {
-            println("In root auth")
-        }
         Children(
-            stack = component.childStack
+            stack = component.childStack,
+            animation = stackAnimation { child ->
+                when(child.instance) {
+                    else -> fade() + scale()
+                }
+            }
         ) { child ->
-            println("Stack root: ${child.instance}")
             when (val instance = child.instance) {
-                is LoginComponent -> instance.content.Content(modifier)
+                is ComponentContentOwner -> instance.content.Content(modifier)
             }
         }
     }
-
 }

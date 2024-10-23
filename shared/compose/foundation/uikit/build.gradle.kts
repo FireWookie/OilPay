@@ -15,6 +15,8 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.shared.compose.resources)
+
             api(projects.shared.compose.foundation.core)
 
             api(compose.foundation)

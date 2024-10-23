@@ -31,11 +31,15 @@ internal class SplashComponentImpl(
     private fun checkNavigation() = store.launch {
         val isAuth = store.isAuthUser()
         val isViewOnBoarding = store.onBoardingInfoViewed()
+        println("Status boarding: $isViewOnBoarding")
+        println("Status auth: $isAuth")
         delay(2000)
         if (isAuth && isViewOnBoarding) {
             dispatch(SplashComponent.Event.NavigateToMain)
         } else if (!isAuth && !isViewOnBoarding) {
             dispatch(SplashComponent.Event.NavigateToOnBoarding)
+        } else if (!isAuth && isViewOnBoarding) {
+            dispatch(SplashComponent.Event.NavigateToAuth)
         } else {
             dispatch(SplashComponent.Event.NavigateToOnBoarding)
         }
