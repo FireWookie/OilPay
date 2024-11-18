@@ -55,6 +55,9 @@ include(":shared:features:auth:otp_code:impl")
 include(":shared:features:auth:security:api")
 include(":shared:features:auth:security:impl")
 
+include(":shared:features:auth:pin_code:api")
+include(":shared:features:auth:pin_code:impl")
+
 include(":shared:features:auth:identification:api")
 include(":shared:features:auth:identification:impl")
 
